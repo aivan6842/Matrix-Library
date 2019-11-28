@@ -15,13 +15,13 @@ Methods included:
       - `matrix1 - matrix2`
   - Elementary row operations
       - Row swapping
-       - `matrix.swap_rows(row1, row2)`
+        - `matrix.swap_rows(row1, row2)`
       - Row multiplication by scalar(k)
-       - `matrix.scale_row(row, k)`
+        - `matrix.scale_row(row, k)`
       - Adding scalar mutliples of rows
-       - `matrix.add_rows(row1, row2, k)`
+        - `matrix.add_rows(row1, row2, k)`
       - Subtracting scalar multiples of rows
-       - `matrix.sub_rows(row1, row2, k)`
+        - `matrix.sub_rows(row1, row2, k)`
   - Converting matrix to Row Echelon Form
       - `matrix.ref()`
   - Converting matrix to Reduced Row Echelon Form
