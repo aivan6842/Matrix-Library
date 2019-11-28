@@ -2,7 +2,7 @@
 This is a library of matrix operations.
 
 Create a matrix by calling the Matrix constructor and passing the number of rows and columns the matrix should have:
-  - `matrix = Matrix(# of rows, # of cols)
+  - `matrix = Matrix(# of rows, # of cols)`
 
 Methods included:
   - Matrix multiplication
