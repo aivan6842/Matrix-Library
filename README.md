@@ -1,2 +1,2 @@
 # Matrix-Library
-This is a library for matrix operations
+This is a library of matrix operations.
