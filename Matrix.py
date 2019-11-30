@@ -342,5 +342,5 @@ class Matrix():
                 if temp_matrix.rows[i][i] != 1:
                     return 0
         return (1/total_scale) * (-1)**(row_swaps)
-        
+
          
