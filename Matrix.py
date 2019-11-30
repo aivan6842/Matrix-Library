@@ -263,6 +263,7 @@ class Matrix():
             piv_row, piv_col = piv
             self.swap_rows(piv_row, i)
             piv_row = i
+            j = piv_col
 
             if self.rows[piv_row][piv_col] > 0:
                 const = Fraction(Fraction('1/1')/Fraction(self.rows[piv_row][piv_col]))
