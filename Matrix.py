@@ -119,7 +119,7 @@ class Matrix():
                 rows.append(new_matrix_rows)
             return Matrix(self.num_rows, self.num_cols, True,rows)
 
-        if self.num_rows != other.num_cols:
+        if self.num_cols != other.num_rows:
             raise Exception('Dimensions of matrices are not the same')
 
         rows = []
