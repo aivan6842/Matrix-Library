@@ -317,6 +317,7 @@ class Matrix():
                 temp_matrix.swap_rows(piv_row, i)
                 row_swaps += 1
                 piv_row = i
+                j = piv_col
 
             if temp_matrix.rows[piv_row][piv_col] > 0:
                 const = Fraction(Fraction('1/1')/Fraction(temp_matrix.rows[piv_row][piv_col]))
