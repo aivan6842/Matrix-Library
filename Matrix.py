@@ -142,6 +142,13 @@ class Matrix():
         '''
         return Matrix.__mul__(self, other)
 
+    def __pow__(self, exp):
+        a = copy.deepcopy(self)
+        for i in range(exp-1):
+            a = Matrix.__mul__(a,self)
+            print(a)
+        return a
+
     def __add__(self, other):
         '''
         (Matrix, Matrix) -> Exception or Matrix
