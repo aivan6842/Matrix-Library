@@ -143,6 +143,11 @@ class Matrix():
         return Matrix.__mul__(self, other)
 
     def __pow__(self, exp):
+        '''
+        (Matrix, int) -> Matrix
+
+        Returns a new matrix that represents a matrix to the exponent of the passed int.
+        '''
         a = copy.deepcopy(self)
         for i in range(exp-1):
             a = Matrix.__mul__(a,self)
