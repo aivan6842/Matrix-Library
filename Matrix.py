@@ -22,6 +22,8 @@ class Matrix():
 
         Prompts the user to create rows for the matrix.
         '''
+        if self.num_cols == 0 or self.num_rows ==0:
+            raise Exception("Invalid dimensions")
         i = 0
         while i < self.num_rows:
             print(f'Enter the entries for row {i+1} separated by spaces:')
