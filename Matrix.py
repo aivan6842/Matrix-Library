@@ -22,7 +22,7 @@ class Matrix():
 
         Prompts the user to create rows for the matrix.
         '''
-        if self.num_cols == 0 or self.num_rows ==0:
+        if self.num_cols <= 0 or self.num_rows <= 0:
             raise Exception("Invalid dimensions")
         i = 0
         while i < self.num_rows:
@@ -145,16 +145,11 @@ class Matrix():
         return Matrix.__mul__(self, other)
 
     def __pow__(self, exp):
-        '''
-        (Matrix, int) -> Matrix
-
-        Returns a new matrix that represents a matrix to the exponent of the passed int.
-        '''
         a = copy.deepcopy(self)
         for i in range(exp-1):
             a = Matrix.__mul__(a,self)
-            print(a)
         return a
+            
 
     def __add__(self, other):
         '''
@@ -235,33 +230,35 @@ class Matrix():
 
         Will convert the given matrix is Row Echelon Form.
         '''
+        tmp_matrix = copy.deepcopy(self)
         i = 0
         j = 0
-        while i < self.num_rows and j < self.num_cols:
-            piv = self.find_pivot(i, j)
+        while i < tmp_matrix.num_rows and j < tmp_matrix.num_cols:
+            piv = tmp_matrix.find_pivot(i, j)
             if not piv:
                 break
             piv_row, piv_col = piv
-            self.swap_rows(piv_row, i)
+            tmp_matrix.swap_rows(piv_row, i)
             piv_row = i
             j = piv_col
 
-            if self.rows[piv_row][piv_col] > 0:
-                const = Fraction(Fraction('1/1')/Fraction(self.rows[piv_row][piv_col]))
-            elif self.rows[i][j] < 0:
-                const = Fraction(Fraction('-1/1')/Fraction(-self.rows[piv_row][piv_col]))
+            if tmp_matrix.rows[piv_row][piv_col] > 0:
+                const = Fraction(Fraction('1/1')/Fraction(tmp_matrix.rows[piv_row][piv_col]))
+            elif tmp_matrix.rows[i][j] < 0:
+                const = Fraction(Fraction('-1/1')/Fraction(-tmp_matrix.rows[piv_row][piv_col]))
             else:
                 const = Fraction('0/1')
                 
-            self.scale_row(i, const)
-            for z in range(i+1, self.num_rows):
-                if self.rows[z][j] > 0:
-                    self.sub_rows(z, i, self.rows[z][j])
-                elif self.rows[z][j] < 0:
-                    self.add_rows(z, i, -self.rows[z][j])
+            tmp_matrix.scale_row(i, const)
+            for z in range(i+1, tmp_matrix.num_rows):
+                if tmp_matrix.rows[z][j] > 0:
+                    tmp_matrix.sub_rows(z, i, tmp_matrix.rows[z][j])
+                elif tmp_matrix.rows[z][j] < 0:
+                    tmp_matrix.add_rows(z, i, -tmp_matrix.rows[z][j])
             i += 1
             j += 1
-         
+
+        return tmp_matrix
 
     def rref(self):
         '''
@@ -269,34 +266,37 @@ class Matrix():
 
         Will convert the given matrix to Reduced Row Echelon Form.
         '''
+        tmp_matrix = copy.deepcopy(self)
         i = 0
         j = 0
-        while i < self.num_rows and j < self.num_cols:
-            piv = self.find_pivot(i, j)
+        while i < tmp_matrix.num_rows and j < tmp_matrix.num_cols:
+            piv = tmp_matrix.find_pivot(i, j)
             if not piv:
                 break
             piv_row, piv_col = piv
-            self.swap_rows(piv_row, i)
+            tmp_matrix.swap_rows(piv_row, i)
             piv_row = i
             j = piv_col
 
-            if self.rows[piv_row][piv_col] > 0:
-                const = Fraction(Fraction('1/1')/Fraction(self.rows[piv_row][piv_col]))
-            elif self.rows[piv_row][piv_col] < 0:
-                const = Fraction(Fraction('-1/1')/Fraction(-self.rows[piv_row][piv_col]))
+            if tmp_matrix.rows[piv_row][piv_col] > 0:
+                const = Fraction(Fraction('1/1')/Fraction(tmp_matrix.rows[piv_row][piv_col]))
+            elif tmp_matrix.rows[piv_row][piv_col] < 0:
+                const = Fraction(Fraction('-1/1')/Fraction(-tmp_matrix.rows[piv_row][piv_col]))
             else:
                 const = Fraction('0/1')
                 
-            self.scale_row(i, const)
-            for z in range(self.num_rows):
+            tmp_matrix.scale_row(i, const)
+            for z in range(tmp_matrix.num_rows):
                 if z == i:
                     continue
-                if self.rows[z][j] > 0:
-                    self.sub_rows(z, i, self.rows[z][j])
-                elif self.rows[z][j] < 0:
-                    self.add_rows(z, i, -self.rows[z][j])
+                if tmp_matrix.rows[z][j] > 0:
+                    tmp_matrix.sub_rows(z, i, tmp_matrix.rows[z][j])
+                elif tmp_matrix.rows[z][j] < 0:
+                    tmp_matrix.add_rows(z, i, -tmp_matrix.rows[z][j])
             i += 1
             j += 1
+
+        return tmp_matrix
 
     def is_square(self):
         '''
